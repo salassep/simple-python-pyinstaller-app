@@ -6,7 +6,7 @@ node {
     }
     docker.image('qnib/pytest').inside {
         stage('Test') {
-            sh 'py.test --verbose test-reports/results.xml sources/test_calc.py'
+            sh 'py.test --verbose sources/test_calc.py'
         }
     }
 }
