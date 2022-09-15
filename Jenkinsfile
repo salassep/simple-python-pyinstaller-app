@@ -1,4 +1,4 @@
-Node {
+node {
     docker.image('python:2-alpine').inside {
         stage('Build') {
             steps {
