@@ -12,8 +12,5 @@ Node {
                 }
             }
         }
-        stage('Deploy') {
-
-        }
     }
 }
