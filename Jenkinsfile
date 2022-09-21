@@ -13,7 +13,6 @@ node {
     docker.image('cdrx/pyinstaller-linux:python2').inside {
         stage('Deploy') {
             sh 'pyinstaller sources/add2vals.py'
-            sleep 60s
         }
     }
 }
