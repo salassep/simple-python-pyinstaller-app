@@ -10,7 +10,7 @@ node {
             input message: 'Lanjutkan ke tahap Deploy ? (Klik "Proceed" untuk melanjutkan)'
         }
     }
-    docker.image('cdrx/pyinstaller-linux:python2').inside {
+    docker.image('cdrx/pyinstaller-linux:python2').inside('$(pwd)/sources:/src') {
         stage('Deploy') {
             sh 'pyinstaller sources/add2vals.py'
         }
