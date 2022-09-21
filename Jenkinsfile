@@ -7,6 +7,13 @@ node {
     docker.image('qnib/pytest').inside {
         stage('Test') {
             sh 'py.test --verbose sources/test_calc.py'
+            input message: 'Lanjutkan ke tahap Deploy ? (Klik "Proceed" untuk melanjutkan)'
+        }
+    }
+    docker.image('cdrx/pyinstaller-linux:python2').inside {
+        stage('Deploy') {
+            sh 'pyinstaller --onefile sources/add2vals.py'
+            sleep 60s
         }
     }
 }
