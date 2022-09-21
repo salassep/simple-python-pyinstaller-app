@@ -8,8 +8,10 @@ node {
     docker.image('qnib/pytest').inside {
         stage('Test') {
             sh 'py.test --verbose sources/test_calc.py'
-            input message: 'Lanjutkan ke tahap Deploy ? (Klik "Proceed" untuk melanjutkan)'
         }
+    }
+    stage('Manual Approval') {
+        input message: 'Lanjutkan ke tahap Deploy ? (Klik "Proceed" untuk melanjutkan)'
     }
     stage('Deploy') {
         dir(path: env.BUILD_ID) {
