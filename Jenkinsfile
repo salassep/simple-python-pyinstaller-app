@@ -12,7 +12,7 @@ node {
     }
     docker.image('cdrx/pyinstaller-linux:python2').inside('$(pwd)/sources:/src') {
         stage('Deploy') {
-            sh 'pyinstaller sources/add2vals.py'
+            sh 'pyinstaller -F add2vals.py'
         }
     }
 }
