@@ -23,9 +23,9 @@ node {
         archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals" 
         
         sh "docker run --rm -v  \$(pwd)/sources:/src cdrx/pyinstaller-linux:python2 'rm -rf build dist'"
-        // sleep(60)
+        sleep(60)
 
-        withCredentials([file(credentialsId: 'my-cred', variable: 'FILE')]) {
+        withCredentials([file(credentialsId: 'secret-file', variable: 'FILE')]) {
             sh "scp -i \$FILE log.txt ubuntu@ec2-13-212-172-197.ap-southeast-1.compute.amazonaws.com:/home/ubuntu//home/ubuntu/simple-python-app"
         }
     }
