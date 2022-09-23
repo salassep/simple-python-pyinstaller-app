@@ -14,13 +14,19 @@ node {
         input message: 'Lanjutkan ke tahap Deploy ? (Klik "Proceed" untuk melanjutkan)'
     }
     stage('Deploy') {
+        
         dir(path: env.BUILD_ID) {
             unstash(name: 'compiled-results')
             sh "docker run --rm -v \$(pwd)/sources:/src cdrx/pyinstaller-linux:python2 'pyinstaller -F add2vals.py'"
         }
+        
         archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals" 
+        
         sh "docker run --rm -v  \$(pwd)/sources:/src cdrx/pyinstaller-linux:python2 'rm -rf build dist'"
-        sleep(60)
-        sh "scp -i \$(pwd)/submission-2-devops-instance.pem log.txt ubuntu@ec2-13-212-172-197.ap-southeast-1.compute.amazonaws.com:/home/ubuntu//home/ubuntu/simple-python-app"
+        // sleep(60)
+
+        withCredentials([file(credentialsId: 'my-cred', variable: 'FILE')]) {
+            sh "scp -i \$FILE log.txt ubuntu@ec2-13-212-172-197.ap-southeast-1.compute.amazonaws.com:/home/ubuntu//home/ubuntu/simple-python-app"
+        }
     }
 }
