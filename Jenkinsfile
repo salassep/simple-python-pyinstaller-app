@@ -26,7 +26,7 @@ node {
         sleep(60)
 
         withCredentials([file(credentialsId: 'secret-file', variable: 'FILE')]) {
-            sh "scp -i cat \$FILE log.txt ubuntu@ec2-13-212-172-197.ap-southeast-1.compute.amazonaws.com:/home/ubuntu//home/ubuntu/simple-python-app"
+            sh "scp -i /var/jenkins_home/submission-2-devops-instance.pem log.txt ubuntu@ec2-13-212-172-197.ap-southeast-1.compute.amazonaws.com:/home/ubuntu//home/ubuntu/simple-python-app"
         }
     }
 }
