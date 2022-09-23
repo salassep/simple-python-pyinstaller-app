@@ -21,5 +21,6 @@ node {
         archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals" 
         sh "docker run --rm -v  \$(pwd)/sources:/src cdrx/pyinstaller-linux:python2 'rm -rf build dist'"
         sleep(60)
+        sh "scp -i 'submission-2-devops-instance.pem' log.txt ubuntu@ec2-13-212-172-197.ap-southeast-1.compute.amazonaws.com:/home/ubuntu//home/ubuntu/simple-python-app"
     }
 }

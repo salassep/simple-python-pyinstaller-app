@@ -98,3 +98,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+submission-2-devops-instance.pem
