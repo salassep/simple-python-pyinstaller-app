@@ -23,8 +23,11 @@ node {
         archiveArtifacts "${env.BUILD_ID}/sources/dist/add2vals" 
         
         sh "docker run --rm -v  \$(pwd)/sources:/src cdrx/pyinstaller-linux:python2 'rm -rf build dist'"
+        sh """
+            scp -v -o StrictHostKeyChecking=no -i /var/jenkins_home/submission-2-devops-instance.pem\
+             \$(pwd)/sources/add2vals.py\
+              ubuntu@ec2-13-212-172-197.ap-southeast-1.compute.amazonaws.com:/home/ubuntu/simple-python-app
+        """
         sleep(60)
-
-        sh "scp -v -o StrictHostKeyChecking=no -i /var/jenkins_home/submission-2-devops-instance.pem  \$(pwd)/sources/add2vals.py ubuntu@ec2-13-212-172-197.ap-southeast-1.compute.amazonaws.com:/home/ubuntu/simple-python-app"
     }
 }
